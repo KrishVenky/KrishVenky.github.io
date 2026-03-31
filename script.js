@@ -284,43 +284,72 @@ async function fetchCrypto() {
     ].filter(t => t.pct != null);
 }
 
+// RAF ticker state
+let tickerOffset = 0;
+let tickerHalfW  = 0;
+let tickerRAF    = null;
+const TICKER_SPEED = 0.7; // px per frame (~42px/s at 60fps)
+
+function tickerLoop() {
+    const inner = document.getElementById('tickerInner');
+    if (!inner) return;
+    tickerOffset -= TICKER_SPEED;
+    if (tickerHalfW > 0 && Math.abs(tickerOffset) >= tickerHalfW) {
+        tickerOffset = 0; // seamless reset at exactly one set width
+    }
+    inner.style.transform = `translateX(${tickerOffset}px)`;
+    tickerRAF = requestAnimationFrame(tickerLoop);
+}
+
+function startTicker() {
+    if (tickerRAF) cancelAnimationFrame(tickerRAF);
+    tickerOffset = 0;
+    // Measure after paint so scrollWidth is accurate
+    requestAnimationFrame(() => {
+        const inner = document.getElementById('tickerInner');
+        if (inner) tickerHalfW = inner.scrollWidth / 2;
+        tickerRAF = requestAnimationFrame(tickerLoop);
+    });
+}
+
 function buildTickerHTML(tickers) {
     const items = tickers.map(({ label, pct }) => {
-        const up  = pct >= 0;
-        const abs = Math.abs(pct).toFixed(2);
-        const cls = up ? 'up' : 'dn';
+        const up    = pct >= 0;
+        const abs   = Math.abs(pct).toFixed(2);
+        const cls   = up ? 'up' : 'dn';
         const arrow = up ? '▲' : '▼';
         return `<span class="ti"><span class="tk">${label}</span> <span class="${cls}">${arrow} ${abs}%</span></span><span class="ti sep">·</span>`;
     }).join('');
-    return items + items; // duplicate for seamless CSS loop
+    return items + items; // duplicate so reset is invisible
+}
+
+function setTickerContent(html) {
+    const inner = document.getElementById('tickerInner');
+    if (!inner) return;
+    inner.innerHTML = html;
+    startTicker();
 }
 
 async function updateTicker() {
     try {
         const [stocks, crypto] = await Promise.allSettled([fetchStocks(), fetchCrypto()]);
         const all = [
-            ...(stocks.status === 'fulfilled'  ? stocks.value  : []),
-            ...(crypto.status === 'fulfilled'  ? crypto.value  : []),
+            ...(stocks.status === 'fulfilled' ? stocks.value : []),
+            ...(crypto.status === 'fulfilled' ? crypto.value : []),
         ];
         if (all.length === 0) return;
-        const inner = document.getElementById('tickerInner');
-        if (inner) inner.innerHTML = buildTickerHTML(all);
+        setTickerContent(buildTickerHTML(all));
     } catch (e) {
-        // silently keep fallback content
+        // keep current content on failure
     }
 }
 
-// Only fetch if a real key is set
-if (FINNHUB_KEY !== 'YOUR_FINNHUB_API_KEY') {
-    updateTicker();
-    setInterval(updateTicker, 60000); // refresh every 60s
-} else {
-    // No key yet — show labeled dashes so layout still looks right
-    const inner = document.getElementById('tickerInner');
-    if (inner) inner.innerHTML = buildTickerHTML(
-        ['SPY', 'GLD', 'TLT', 'USO', 'BTC', 'ETH'].map(l => ({ label: l, pct: 0 }))
-    );
-}
+// Boot
+const fallbackTickers = ['SPY', 'GLD', 'TLT', 'USO', 'BTC', 'ETH'].map(l => ({ label: l, pct: 0 }));
+setTickerContent(buildTickerHTML(fallbackTickers));
+
+updateTicker();
+setInterval(updateTicker, 60000);
 
 /* =============================================
    SMOOTH ANCHOR SCROLL (fallback)
