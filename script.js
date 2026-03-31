@@ -243,113 +243,163 @@ const counterObs = new IntersectionObserver((entries) => {
 document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
 
 /* =============================================
-   LIVE TICKER TAPE
+   LIVE TICKER TAPE — news channel style
    ============================================= */
 
-// ← PASTE YOUR FREE FINNHUB KEY HERE (finnhub.io → sign up → API Keys)
 const FINNHUB_KEY = 'd75plfpr01qk56kdlj7gd75plfpr01qk56kdlj80';
 
-const STOCKS = [
-    { symbol: 'SPY', label: 'SPY' },
-    { symbol: 'GLD', label: 'GLD' },
-    { symbol: 'TLT', label: 'TLT' },
-    { symbol: 'USO', label: 'USO' },
+// US ETFs via Finnhub (real-time, one call each)
+const FINNHUB_TICKERS = [
+    { symbol: 'SPY', label: 'S&P 500' },
+    { symbol: 'QQQ', label: 'NASDAQ'  },
+    { symbol: 'GLD', label: 'GOLD'    },
+    { symbol: 'USO', label: 'OIL'     },
+    { symbol: 'TLT', label: 'BONDS'   },
 ];
 
-async function fetchStocks() {
+// Global indices via Yahoo Finance → corsproxy.io (one call each, graceful fallback)
+const YAHOO_TICKERS = [
+    { symbol: '%5EN225',  label: 'NIKKEI 225' },
+    { symbol: '%5EKS11',  label: 'KOSPI'      },
+    { symbol: '%5EBSESN', label: 'SENSEX'     },
+    { symbol: '%5EGDAXI', label: 'DAX'        },
+    { symbol: '%5EFTSE',  label: 'FTSE 100'   },
+    { symbol: '%5EHSI',   label: 'HANG SENG'  },
+    { symbol: '%5EN100',  label: 'CAC 40'     },
+];
+
+async function fetchFinnhub() {
     const results = await Promise.allSettled(
-        STOCKS.map(async ({ symbol, label }) => {
-            const res = await fetch(
-                `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`
+        FINNHUB_TICKERS.map(async ({ symbol, label }) => {
+            const r = await fetch(
+                `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`,
+                { signal: AbortSignal.timeout(5000) }
             );
-            const d = await res.json();
+            const d = await r.json();
             if (!d.c || d.c === 0) throw new Error('no data');
             return { label, pct: d.dp };
         })
     );
-    return results
-        .filter(r => r.status === 'fulfilled')
-        .map(r => r.value);
+    return results.filter(r => r.status === 'fulfilled').map(r => r.value);
+}
+
+async function fetchYahoo() {
+    const results = await Promise.allSettled(
+        YAHOO_TICKERS.map(async ({ symbol, label }) => {
+            const yUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`;
+            const r = await fetch(
+                `https://corsproxy.io/?${encodeURIComponent(yUrl)}`,
+                { signal: AbortSignal.timeout(7000) }
+            );
+            const d = await r.json();
+            const pct = d?.chart?.result?.[0]?.meta?.regularMarketChangePercent;
+            if (pct == null) throw new Error('no data');
+            return { label, pct };
+        })
+    );
+    return results.filter(r => r.status === 'fulfilled').map(r => r.value);
 }
 
 async function fetchCrypto() {
-    const res = await fetch(
+    const r = await fetch(
         'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true',
         { signal: AbortSignal.timeout(5000) }
     );
-    const d = await res.json();
+    const d = await r.json();
     return [
         { label: 'BTC', pct: d.bitcoin?.usd_24h_change },
         { label: 'ETH', pct: d.ethereum?.usd_24h_change },
     ].filter(t => t.pct != null);
 }
 
-// RAF ticker state
-let tickerOffset = 0;
-let tickerHalfW  = 0;
-let tickerRAF    = null;
-const TICKER_SPEED = 0.7; // px per frame (~42px/s at 60fps)
+/* --- Ticker DOM animation (node-recycling, right→left) --- */
 
-function tickerLoop() {
+let txX       = 0;
+let txLastTS  = null;
+let txRAF     = null;
+const TX_SPEED = 75; // px/s — adjust to taste
+
+function makeTiNode({ label, pct }) {
+    const up  = pct >= 0;
+    const el  = document.createElement('span');
+    el.className = 'ti-item';
+    el.innerHTML =
+        `<span class="ti"><span class="tk">${label}</span>` +
+        `<span class="${up ? 'up' : 'dn'}">${up ? '▲' : '▼'} ${Math.abs(pct).toFixed(2)}%</span></span>` +
+        `<span class="ti sep">·</span>`;
+    return el;
+}
+
+function populateTicker(tickers) {
     const inner = document.getElementById('tickerInner');
     if (!inner) return;
-    tickerOffset -= TICKER_SPEED;
-    if (tickerHalfW > 0 && Math.abs(tickerOffset) >= tickerHalfW) {
-        tickerOffset = 0; // seamless reset at exactly one set width
+
+    if (txRAF) { cancelAnimationFrame(txRAF); txRAF = null; }
+
+    inner.innerHTML = '';
+    tickers.forEach(t => inner.appendChild(makeTiNode(t)));
+
+    // Clone until content is at least 3× viewport wide — guarantees no gap ever
+    let passes = 0;
+    while (inner.scrollWidth < window.innerWidth * 3 && passes++ < 10) {
+        tickers.forEach(t => inner.appendChild(makeTiNode(t)));
     }
-    inner.style.transform = `translateX(${tickerOffset}px)`;
-    tickerRAF = requestAnimationFrame(tickerLoop);
+
+    txX = 0;
+    txLastTS = null;
+    inner.style.transform = 'translateX(0px)';
+    txRAF = requestAnimationFrame(txStep);
 }
 
-function startTicker() {
-    if (tickerRAF) cancelAnimationFrame(tickerRAF);
-    tickerOffset = 0;
-    // Measure after paint so scrollWidth is accurate
-    requestAnimationFrame(() => {
-        const inner = document.getElementById('tickerInner');
-        if (inner) tickerHalfW = inner.scrollWidth / 2;
-        tickerRAF = requestAnimationFrame(tickerLoop);
-    });
-}
+function txStep(ts) {
+    if (txLastTS === null) txLastTS = ts;
+    const dt = Math.min((ts - txLastTS) / 1000, 0.05);
+    txLastTS = ts;
 
-function buildTickerHTML(tickers) {
-    const items = tickers.map(({ label, pct }) => {
-        const up    = pct >= 0;
-        const abs   = Math.abs(pct).toFixed(2);
-        const cls   = up ? 'up' : 'dn';
-        const arrow = up ? '▲' : '▼';
-        return `<span class="ti"><span class="tk">${label}</span> <span class="${cls}">${arrow} ${abs}%</span></span><span class="ti sep">·</span>`;
-    }).join('');
-    return items + items; // duplicate so reset is invisible
-}
+    txX -= TX_SPEED * dt;
 
-function setTickerContent(html) {
     const inner = document.getElementById('tickerInner');
-    if (!inner) return;
-    inner.innerHTML = html;
-    startTicker();
-}
+    if (!inner) { txRAF = requestAnimationFrame(txStep); return; }
 
-async function updateTicker() {
-    try {
-        const [stocks, crypto] = await Promise.allSettled([fetchStocks(), fetchCrypto()]);
-        const all = [
-            ...(stocks.status === 'fulfilled' ? stocks.value : []),
-            ...(crypto.status === 'fulfilled' ? crypto.value : []),
-        ];
-        if (all.length === 0) return;
-        setTickerContent(buildTickerHTML(all));
-    } catch (e) {
-        // keep current content on failure
+    // Recycle: first child fully off-screen left → append to end
+    // First child offsetLeft is always 0 in flex, so right edge = txX + offsetWidth
+    const first = inner.firstElementChild;
+    if (first && txX + first.offsetWidth < 0) {
+        txX += first.offsetWidth;   // shift so no visual jump
+        inner.appendChild(first);   // re-enters from right
     }
+
+    inner.style.transform = `translateX(${txX}px)`;
+    txRAF = requestAnimationFrame(txStep);
 }
 
-// Boot
-const fallbackTickers = ['SPY', 'GLD', 'TLT', 'USO', 'BTC', 'ETH'].map(l => ({ label: l, pct: 0 }));
-setTickerContent(buildTickerHTML(fallbackTickers));
+async function refreshTicker() {
+    // Fire all 3 sources in parallel — one round of calls per minute
+    const [stocks, indices, crypto] = await Promise.allSettled([
+        fetchFinnhub(),
+        fetchYahoo(),
+        fetchCrypto(),
+    ]);
 
-updateTicker();
-setInterval(updateTicker, 60000);
+    const all = [
+        ...(stocks.status  === 'fulfilled' ? stocks.value  : []),
+        ...(indices.status === 'fulfilled' ? indices.value : []),
+        ...(crypto.status  === 'fulfilled' ? crypto.value  : []),
+    ];
+
+    if (all.length > 0) populateTicker(all);
+}
+
+// Boot: show labels with dashes immediately, then fetch real data
+const FALLBACK = [
+    ...FINNHUB_TICKERS.map(t => ({ label: t.label, pct: 0 })),
+    ...YAHOO_TICKERS.map(t  => ({ label: t.label, pct: 0 })),
+    { label: 'BTC', pct: 0 },
+    { label: 'ETH', pct: 0 },
+];
+populateTicker(FALLBACK);
+refreshTicker();
+setInterval(refreshTicker, 60000);
 
 /* =============================================
    SMOOTH ANCHOR SCROLL (fallback)

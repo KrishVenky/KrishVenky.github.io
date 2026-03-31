@@ -241,17 +241,23 @@ nav, section, footer { position: relative; z-index: 1; }
     white-space: nowrap;
     will-change: transform;
 }
+.ti-item {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+}
 .ti {
     font-family: var(--mono);
     font-size: 0.68rem;
-    padding: 0 14px;
+    padding: 0 10px;
     color: var(--text-3);
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 5px;
+    white-space: nowrap;
 }
-.ti.sep { padding: 0 4px; color: var(--border); font-size: 0.6rem; }
-.tk { color: var(--text-2); font-weight: 600; letter-spacing: 0.04em; }
+.ti.sep { padding: 0 4px; color: rgba(34,211,238,0.2); font-size: 0.55rem; }
+.tk { color: var(--text-2); font-weight: 600; letter-spacing: 0.05em; }
 .up { color: var(--green); }
 .dn { color: #f87171; }
 
