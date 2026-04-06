@@ -145,15 +145,15 @@ nav, section, footer { position: relative; z-index: 1; }
     font-family: var(--mono);
     font-size: 1rem;
     font-weight: 600;
-    color: var(--cyan);
+    color: #000;
     text-decoration: none;
-    border: 1px solid rgba(34,211,238,0.25);
+    border: 1px solid var(--border);
     padding: 6px 12px;
     border-radius: 6px;
     transition: background 0.2s, box-shadow 0.2s;
     flex-shrink: 0;
 }
-.nav-logo:hover { background: var(--cyan-dim); box-shadow: 0 0 18px var(--cyan-glow); }
+.nav-logo:hover { background: var(--bg-1); }
 
 .nav-links { display: flex; gap: 28px; margin-left: auto; }
 
@@ -178,17 +178,17 @@ nav, section, footer { position: relative; z-index: 1; }
 .nav-link:hover::after { transform: scaleX(1); }
 
 .nav-cta {
-    color: var(--cyan);
+    color: #000;
     text-decoration: none;
     font-size: 0.875rem;
     font-weight: 500;
-    border: 1px solid rgba(34,211,238,0.25);
+    border: 1px solid var(--border);
     padding: 8px 18px;
     border-radius: 6px;
     flex-shrink: 0;
     transition: background 0.2s, box-shadow 0.2s;
 }
-.nav-cta:hover { background: var(--cyan-dim); box-shadow: 0 0 18px var(--cyan-glow); }
+.nav-cta:hover { background: var(--bg-1); }
 
 .nav-actions { display: flex; align-items: center; gap: 10px; }
 
@@ -225,7 +225,7 @@ nav, section, footer { position: relative; z-index: 1; }
    ============================================= */
 .ticker-tape {
     position: fixed;
-    top: 61px;
+    top: 85px;
     left: 0; right: 0;
     z-index: 99;
     overflow: hidden;
@@ -438,26 +438,16 @@ nav, section, footer { position: relative; z-index: 1; }
     font-weight: 900;
     line-height: 1.03;
     letter-spacing: -0.035em;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
 }
 
-.hero-typewriter {
-    font-size: clamp(1rem, 2vw, 1.3rem);
+.hero-subtitle {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
     color: var(--text-2);
-    margin-bottom: 20px;
-    min-height: 2em;
-}
-#typed-text {
-    color: var(--cyan);
-    font-family: var(--mono);
     font-weight: 500;
+    margin-bottom: 24px;
+    line-height: 1.4;
 }
-.type-cursor {
-    color: var(--cyan);
-    font-family: var(--mono);
-    animation: blink 1s step-end infinite;
-}
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
 .hero-bio {
     color: var(--text-2);
@@ -585,37 +575,38 @@ nav, section, footer { position: relative; z-index: 1; }
 
 /* Terminal */
 .about-terminal {
-    background: rgba(4,12,28,0.9);
+    background: #fafafa;
     border: 1px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
     font-family: var(--mono);
-    font-size: 0.82rem;
-    backdrop-filter: blur(20px);
+    font-size: 0.85rem;
+    color: #333;
 }
 .terminal-header {
     display: flex;
     align-items: center;
     gap: 8px;
     padding: 11px 16px;
-    background: rgba(255,255,255,0.03);
+    background: #f1f1f1;
     border-bottom: 1px solid var(--border);
 }
 .dot { width: 12px; height: 12px; border-radius: 50%; }
 .dot-red    { background: #ff5f57; }
 .dot-yellow { background: #febc2e; }
 .dot-green  { background: #28c840; }
-.terminal-title { color: var(--text-3); font-size: 0.75rem; margin-left: 4px; }
+.terminal-title { color: #666; font-size: 0.75rem; margin-left: 4px; }
 
 .terminal-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 5px; }
-.terminal-line { display: flex; align-items: center; gap: 8px; color: var(--text-2); line-height: 1.5; }
+.terminal-line { display: flex; align-items: center; gap: 8px; color: #333; line-height: 1.5; }
 .terminal-line.mt { margin-top: 10px; }
-.t-prompt { color: var(--cyan); }
-.t-cmd    { color: var(--text-1); }
-.t-out    { padding-left: 16px; }
-.t-green  { color: var(--green); }
-.t-amber  { color: var(--amber); }
-.t-cursor { color: var(--cyan); animation: blink 1s step-end infinite; }
+.t-prompt { color: #555; }
+.t-cmd    { color: #000; font-weight: 600; }
+.t-out    { padding-left: 16px; color: #444; }
+.t-green  { color: #10b981; }
+.t-amber  { color: #f59e0b; }
+.t-cursor { color: #000; animation: blink 1s step-end infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
 /* =============================================
    EXPERIENCE
