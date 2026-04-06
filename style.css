@@ -4,31 +4,31 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-    --bg-0: #020817;
-    --bg-1: #060f23;
-    --bg-card: rgba(10, 22, 40, 0.65);
+    --bg-0: #ffffff;
+    --bg-1: #f9f9f9;
+    --bg-card: #ffffff;
 
-    --cyan: #22d3ee;
-    --cyan-dim: rgba(34, 211, 238, 0.12);
-    --cyan-glow: rgba(34, 211, 238, 0.35);
-    --purple: #a855f7;
-    --purple-dim: rgba(168, 85, 247, 0.12);
-    --green: #10b981;
-    --amber: #f59e0b;
+    --cyan: #000000;
+    --cyan-dim: rgba(0, 0, 0, 0.05);
+    --cyan-glow: transparent;
+    --purple: #000000;
+    --purple-dim: rgba(0, 0, 0, 0.05);
+    --green: #000000;
+    --amber: #000000;
 
-    --text-1: #f1f5f9;
-    --text-2: #94a3b8;
-    --text-3: #475569;
+    --text-1: #000000;
+    --text-2: #333333;
+    --text-3: #555555;
 
-    --border: rgba(34, 211, 238, 0.1);
-    --border-h: rgba(34, 211, 238, 0.3);
+    --border: rgba(0, 0, 0, 0.15);
+    --border-h: rgba(0, 0, 0, 0.3);
 
     --sans: 'Inter', system-ui, sans-serif;
     --mono: 'JetBrains Mono', 'Fira Code', monospace;
 
-    --max-w: 1200px;
-    --py: 120px;
-    --px: 40px;
+    --max-w: 800px;
+    --py: 80px;
+    --px: 20px;
 }
 
 html {
@@ -126,7 +126,7 @@ nav, section, footer { position: relative; z-index: 1; }
     border-bottom: 1px solid transparent;
 }
 #navbar.scrolled {
-    background: rgba(2,8,23,0.88);
+    background: rgba(255,255,255,0.95);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border-bottom-color: var(--border);
@@ -229,9 +229,9 @@ nav, section, footer { position: relative; z-index: 1; }
     left: 0; right: 0;
     z-index: 99;
     overflow: hidden;
-    background: rgba(2,8,23,0.75);
+    background: rgba(255,255,255,0.95);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(34,211,238,0.07);
+    border-bottom: 1px solid var(--border);
     height: 30px;
     display: flex;
     align-items: center;
@@ -271,7 +271,7 @@ nav, section, footer { position: relative; z-index: 1; }
 .mobile-menu {
     display: none;
     flex-direction: column;
-    background: rgba(2,8,23,0.96);
+    background: rgba(255,255,255,0.96);
     backdrop-filter: blur(24px);
     border-bottom: 1px solid var(--border);
     padding: 16px var(--px) 24px;
@@ -412,10 +412,10 @@ nav, section, footer { position: relative; z-index: 1; }
 }
 
 .hero-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: flex-start;
 }
 
 .hero-badge {
