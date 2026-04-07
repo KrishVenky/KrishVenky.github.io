@@ -3,43 +3,6 @@
    ============================================= */
 // Removed to make the website simpler and black & white.
 
-/* =============================================
-   TYPEWRITER
-   ============================================= */
-const phrases = [
-    'quantitative systems.',
-    'ML pipelines.',
-    'blockchain oracles.',
-    'prediction markets.',
-    'multi-agent AI.',
-];
-
-let phraseIdx = 0, charIdx = 0, isDeleting = false;
-const typedEl = document.getElementById('typed-text');
-
-function type() {
-    const current = phrases[phraseIdx];
-    
-    if (isDeleting) {
-        charIdx--;
-    } else {
-        charIdx++;
-    }
-    
-    typedEl.textContent = current.substring(0, charIdx);
-
-    let delay = isDeleting ? 40 : 80;
-    if (!isDeleting && charIdx === current.length) {
-        delay = 2000; 
-        isDeleting = true;
-    } else if (isDeleting && charIdx === 0) {
-        isDeleting = false;
-        phraseIdx = (phraseIdx + 1) % phrases.length;
-        delay = 350;
-    }
-    setTimeout(type, delay);
-}
-type();
 
 /* =============================================
    NAVBAR SCROLL
