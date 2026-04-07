@@ -5,6 +5,25 @@
 
 
 /* =============================================
+   DARK MODE TOGGLE
+   ============================================= */
+const themeToggle = document.getElementById('themeToggle');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+function applyTheme(dark) {
+    document.body.classList.toggle('dark', dark);
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+}
+
+// Initialize: use stored preference, else follow OS
+const stored = localStorage.getItem('theme');
+applyTheme(stored ? stored === 'dark' : prefersDark.matches);
+
+themeToggle.addEventListener('click', () => {
+    applyTheme(!document.body.classList.contains('dark'));
+});
+
+/* =============================================
    NAVBAR SCROLL
    ============================================= */
 const navbar = document.getElementById('navbar');
@@ -239,7 +258,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
         const target = document.querySelector(a.getAttribute('href'));
         if (!target) return;
         e.preventDefault();
-        const top = target.getBoundingClientRect().top + window.scrollY - 72;
+        const top = target.getBoundingClientRect().top + window.scrollY - 110;
         window.scrollTo({ top, behavior: 'smooth' });
     });
 });
