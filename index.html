@@ -30,12 +30,6 @@
       <a href="mailto:krishvenky14@gmail.com" class="nav-btn solid">Contact →</a>
     </div>
   </div>
-  <!-- TELEX (inside nav, hides once past hero) -->
-  <div class="telex" id="telex" aria-hidden="true">
-    <div class="telex-tag"><span class="blink"></span>LIVE · MKTS</div>
-    <div class="telex-viewport"><div class="telex-stream" id="tickerInner"></div></div>
-    <div class="telex-time" id="telexTime">—</div>
-  </div>
 </nav>
 
 <main class="page">
@@ -388,10 +382,28 @@
     </div>
   </section>
 
+  <!-- MARKETS -->
+  <section id="markets">
+    <div class="sec-head reveal">
+      <div class="sec-num">06 — Markets</div>
+      <h2 class="sec-title">Tracking the <em>financial world.</em></h2>
+      <div class="sec-meta">Live · Streams</div>
+    </div>
+    <div class="reveal">
+      <p style="margin-bottom: 32px; color: var(--ink-2); max-width: 600px; font-family: var(--body); font-size: 21px;">Consuming market data and continuously building in the quantitative finance space. Live ticker tracking the indices and crypto assets running my models.</p>
+      
+      <div class="telex" id="telex" style="border: 1px solid var(--ink); border-radius: 4px; overflow: hidden; max-height: 40px; height: 40px; background: var(--paper-2); opacity: 1 !important;">
+        <div class="telex-tag" style="display: flex; align-items: center;"><span class="blink"></span>LIVE · MKTS</div>
+        <div class="telex-viewport" style="display: flex; align-items: center;"><div class="telex-stream" id="tickerInner" style="height: 100%;"></div></div>
+        <div class="telex-time" id="telexTime" style="display: flex; align-items: center;">—</div>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section id="contact">
     <div class="sec-head reveal">
-      <div class="sec-num">06 — Contact</div>
+      <div class="sec-num">07 — Contact</div>
       <h2 class="sec-title">End <em>matter.</em></h2>
       <div class="sec-meta">reach · direct</div>
     </div>
