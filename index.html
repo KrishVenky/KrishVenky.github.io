@@ -1,443 +1,437 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krishna Venkatesh · ML Engineer</title>
-    <meta name="description" content="Builder of quantitative systems for financial markets. ML Engineer & AI researcher at PES University.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krishna Venkatesh — Notebook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- NAV -->
-    <nav id="navbar">
-        <div class="nav-inner">
-            <a href="#hero" class="nav-logo">KV</a>
-            <div class="nav-links">
-                <a href="#about" class="nav-link">About</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#research" class="nav-link">Research</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-            <div class="nav-actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-                </button>
-                <a href="https://drive.google.com/file/d/1BsJ9-10NhwA9-6UIW3t91uJRYdr7mm0H/view?usp=sharing" target="_blank" rel="noopener" class="nav-resume" id="cvBtn">Resume ↓</a>
-                <a href="mailto:krishvenky14@gmail.com" class="nav-cta">Get in touch</a>
-            </div>
-            <button class="nav-hamburger" id="hamburger" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-        <div class="mobile-menu" id="mobileMenu">
-            <a href="#about">About</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#research">Research</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
+<div class="grain"></div>
 
-    <!-- TICKER TAPE (populated by JS with live data) -->
-    <div class="ticker-tape" aria-hidden="true">
-        <div class="ticker-inner" id="tickerInner">
-            <!-- static fallback shown while API loads -->
-            <span class="ti"><span class="tk">SPY</span> <span class="up">—</span></span>
-            <span class="ti sep">·</span>
-            <span class="ti"><span class="tk">GLD</span> <span class="up">—</span></span>
-            <span class="ti sep">·</span>
-            <span class="ti"><span class="tk">TLT</span> <span class="up">—</span></span>
-            <span class="ti sep">·</span>
-            <span class="ti"><span class="tk">USO</span> <span class="up">—</span></span>
-            <span class="ti sep">·</span>
-            <span class="ti"><span class="tk">BTC</span> <span class="up">—</span></span>
-            <span class="ti sep">·</span>
-            <span class="ti"><span class="tk">ETH</span> <span class="up">—</span></span>
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#cover" class="nav-mark">
+      <span class="dot"></span>Krishna V.<span class="meta">no. 001 · 2026</span>
+    </a>
+    <div class="nav-links">
+      <a href="#about"><span class="num">01</span>About</a>
+      <a href="#experience"><span class="num">02</span>Experience</a>
+      <a href="#projects"><span class="num">03</span>Projects</a>
+      <a href="#research"><span class="num">04</span>Research</a>
+      <a href="#skills"><span class="num">05</span>Stack</a>
+    </div>
+    <div class="nav-right">
+      <a href="https://drive.google.com/file/d/1BsJ9-10NhwA9-6UIW3t91uJRYdr7mm0H/view?usp=sharing" target="_blank" rel="noopener" class="nav-btn">CV ↗</a>
+      <a href="/cdn-cgi/l/email-protection#442f362d372c32212a2f3d7570042329252d286a272b29" class="nav-btn solid">Contact →</a>
+    </div>
+  </div>
+  <!-- TELEX (inside nav, hides once past hero) -->
+  <div class="telex" id="telex" aria-hidden="true">
+    <div class="telex-tag"><span class="blink"></span>LIVE · MKTS</div>
+    <div class="telex-viewport"><div class="telex-stream" id="tickerInner"></div></div>
+    <div class="telex-time" id="telexTime">—</div>
+  </div>
+</nav>
+
+<main class="page">
+
+  <!-- COVER -->
+  <section id="cover" class="cover">
+    <div class="cover-top">
+      <span>Vol. I &nbsp;/&nbsp; A Working Notebook</span>
+      <span class="stamp">Bengaluru · IN</span>
+      <span>Quant · ML · Decentralized Systems</span>
+    </div>
+    <div class="cover-grid">
+      <div>
+        <h1 class="reveal">
+          Krishna<br>
+          <span class="it">Venkatesh</span><br>
+          <span class="it" style="color:var(--ink-3);font-size:.58em;letter-spacing:0;">— a working notebook.</span>
+        </h1>
+        <p class="cover-lede reveal">
+          A working notebook of quantitative systems, ML pipelines, and on-chain experiments — kept while reading for <em>CS (AI/ML)</em> at PES University. Currently in the weeds of multi-agent frameworks for equity research, and a NAV oracle that refuses to be opaque.
+        </p>
+        <div class="cover-byline reveal">
+          <span class="pulse"></span>
+          <span>Graduating May 2027</span>
+          <span>·</span>
+          <span>Open to internships & research</span>
+          <span>·</span>
+          <span id="localTime">—</span>
         </div>
+      </div>
+
+      <!-- Logbook -->
+      <div class="logbook reveal">
+        <div class="logbook-head">
+          <span>./logbook — session.live</span>
+          <span class="live"><span class="d"></span>recording</span>
+        </div>
+        <div class="logbook-body">
+          <div class="log-row"><span class="log-t">00:14</span><span class="log-v">boot :: agent v0.3.1</span><span class="log-r">ok</span></div>
+          <div class="log-row"><span class="log-t">00:22</span><span class="log-v">load :: nifty_constituents</span><span class="log-r">5 px</span></div>
+          <div class="log-row"><span class="log-t">00:41</span><span class="log-v accent">signal :: fed_rate_shock</span><span class="log-r">T+4</span></div>
+          <div class="log-row"><span class="log-t">01:03</span><span class="log-v">rebal :: SPY/GLD/USO/TLT</span><span class="log-r">△ 0.41</span></div>
+          <div class="log-row"><span class="log-t">01:19</span><span class="log-v">FinBERT · sentiment = −0.62</span><span class="log-r">hi-conf</span></div>
+          <div class="log-row"><span class="log-t">01:37</span><span class="log-v up">forecast :: won 57.1%</span><span class="log-r">n=112</span></div>
+          <div class="log-row"><span class="log-t">02:04</span><span class="log-v">paper :: QBM vs SMOTE</span><span class="log-r">+2.8 F1</span></div>
+          <div class="log-row"><span class="log-t">02:28</span><span class="log-v">oracle :: NAV on-chain</span><span class="log-r">wip</span></div>
+          <div class="log-row"><span class="log-t">02:51</span><span class="log-v">await :: next_tick</span><span class="log-r">…</span></div>
+        </div>
+        <div class="log-tail">
+          <span>uptime 14d 06:31</span>
+          <span>lat 42ms</span>
+        </div>
+      </div>
     </div>
 
-    <!-- HERO -->
-    <section id="hero">
-        <div class="hero-wrapper">
-            <div class="hero-left">
-                <div class="hero-badge reveal">
-                    <span class="pulse-dot"></span>
-                    CS (AI/ML) &nbsp;·&nbsp; PES University &nbsp;·&nbsp; May 2027
-                </div>
-                <h1 class="hero-name reveal">
-                    Krishna<br><span class="accent">Venkatesh</span>
-                </h1>
-                <p class="hero-bio reveal">
-                    Quantitative systems builder. ML pipelines, decentralized oracles, and prediction markets. Exploring multi-agent frameworks for equity research.
-                </p>
-                <div class="hero-socials reveal">
-                    <a href="https://github.com/KrishVenky" target="_blank" rel="noopener" class="social-btn">
-                        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                        GitHub
-                    </a>
-                    <a href="https://linkedin.com/in/krishnavenky/" target="_blank" rel="noopener" class="social-btn">
-                        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        LinkedIn
-                    </a>
-                    <a href="mailto:krishvenky14@gmail.com" class="social-btn">
-                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-                        Email
-                    </a>
-                </div>
+    <!-- Interests strip -->
+    <div class="interests reveal">
+      <div class="int"><span class="k">// focus</span><span class="v">Quant systems</span></div>
+      <div class="int"><span class="k">// focus</span><span class="v">ML pipelines</span></div>
+      <div class="int"><span class="k">// focus</span><span class="v">Decentralized oracles</span></div>
+      <div class="int"><span class="k">// focus</span><span class="v">Prediction mkts</span></div>
+      <div class="int"><span class="k">// focus</span><span class="v">Quantum ML</span></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="sec-head reveal">
+      <div class="sec-num">01 — About</div>
+      <h2 class="sec-title">A short <em>field note.</em></h2>
+      <div class="sec-meta">Folio 01 / 06</div>
+    </div>
+    <div class="about-grid">
+      <div class="about-body reveal">
+        <p>I build production-grade ML infrastructure at the seam between quantitative finance and AI. Most days that looks like reading data in, writing models out, and arguing with myself about <em>what counts as a signal</em>.</p>
+        <p>Past work spans continuous pipelines at SmartWealth.ai tracking every Nifty constituent, open-source AI tools for the EkStep Foundation, and quantum computing research on class imbalance. Currently: multi-agent frameworks for equity research, and a NAV oracle that pushes fund pricing on-chain.</p>
+        <p>When I'm not in the weeds of model architecture I'm thinking about decentralized risk — how consensus can replace opaque financial infrastructure, and what <em>on-chain</em> actually gives you that a Postgres row doesn't.</p>
+        <div class="tags">
+          <span class="tag">Quant Finance</span>
+          <span class="tag">ML Systems</span>
+          <span class="tag">DeFi / Oracles</span>
+          <span class="tag">NLP / RAG</span>
+          <span class="tag">Prediction Mkts</span>
+          <span class="tag">Quantum ML</span>
+        </div>
+      </div>
+      <div>
+        <div class="margin-note reveal">
+          <span class="label">marginalia · 2026·q2</span>
+          "The model that predicts the world is the same model that <em>changes</em> it. Forecasting and acting are the same motion, once you're in the market."
+        </div>
+        <div class="specimen reveal">
+          <div class="sp-head"><span>specimen · config.yml</span><span>v0.3</span></div>
+<pre><span class="c"># current mental model</span>
+<span class="k">agent</span>:
+  <span class="k">role</span>:   <span class="s">"macro-quant analyst"</span>
+  <span class="k">horizon</span>: <span class="v">4</span>  <span class="c"># steps</span>
+  <span class="k">assets</span>: [SPY, GLD, USO, TLT]
+<span class="k">belief</span>:
+  <span class="k">priors</span>:   <span class="s">"humble"</span>
+  <span class="k">updates</span>:  <span class="s">"on-chain, verifiable"</span>
+<span class="k">status</span>:
+  <span class="k">oracle</span>:   <span class="s">"building"</span>
+  <span class="k">papers</span>:   <span class="v">2</span>  <span class="c"># in review</span>
+  <span class="k">open_to</span>:  [internship, research]</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="sec-head reveal">
+      <div class="sec-num">02 — Experience</div>
+      <h2 class="sec-title">Where I've <em>shipped.</em></h2>
+      <div class="sec-meta">Entries · 03</div>
+    </div>
+
+    <div class="exp-list">
+      <div class="exp-row reveal">
+        <div class="exp-date">May — Jul<br>2025</div>
+        <div class="exp-main">
+          <h3>SmartWealth<span class="sub">Bengaluru · IN</span></h3>
+          <div class="exp-role">ML Intern · Quant Pipelines</div>
+          <div class="exp-body">
+            <p>Architected a continuous data pipeline with custom scrapers tracking every <strong>Nifty index constituent</strong> — entry/exit events, real-time volatility, P/E & P/B across 5 thematic pillars.</p>
+            <p>Engineered a RAG system combining <strong>Gemini + FinBERT + ChromaDB</strong> for Indian-market sentiment. Generated market insight reports in under <strong>5 min</strong>, cutting research time by <strong>90%+</strong> — directly supporting the Aspire Diversified Portfolio (top 2% on Smallcase, 55.11% 3yr CAGR).</p>
+          </div>
+        </div>
+        <div class="exp-side">
+          <span>Stack</span>
+          <div class="stack">
+            <span>Python</span><span>FinBERT</span><span>RAG</span><span>ChromaDB</span><span>Gemini</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div class="exp-date">Jun — Jul<br>2024</div>
+        <div class="exp-main">
+          <h3>People+AI<span class="sub">EkStep Fdn.</span></h3>
+          <div class="exp-role">ML Intern · Open-Source AI</div>
+          <div class="exp-body">
+            <p>Built and shipped two open-source tools: <strong>ConsumeWise</strong> (multilingual food-label analysis — English, Hindi, Marathi) and a chatbot for <strong>Sthaan</strong>, a UPI-style address protocol for last-mile delivery in Tier 2/3 cities.</p>
+            <p>Delivered ConsumeWise zero-to-demo in under a week on Agile cadence. Supported setup of the org's AI Governance Expert Council — advisor outreach and briefings.</p>
+          </div>
+        </div>
+        <div class="exp-side">
+          <span>Stack</span>
+          <div class="stack">
+            <span>React</span><span>NLP</span><span>LangChain</span><span>Multilingual</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div class="exp-date">Volunteer<br>—</div>
+        <div class="exp-main">
+          <h3>I Love To Care<span class="sub">Charitable Trust</span></h3>
+          <div class="exp-role">Technical Volunteer · Full-stack</div>
+          <div class="exp-body">
+            <p>Architected and deployed a secure volunteer management and auth portal, scaling to track <strong>thousands</strong> of community service hours. Engineered a centralised DB for registration, hour verification, and reporting — replacing legacy manual data entry.</p>
+          </div>
+        </div>
+        <div class="exp-side">
+          <span>Stack</span>
+          <div class="stack">
+            <span>Full-stack</span><span>Auth</span><span>DB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="sec-head reveal">
+      <div class="sec-num">03 — Projects</div>
+      <h2 class="sec-title">Things I've <em>built.</em></h2>
+      <div class="sec-meta">Exhibits · 05</div>
+    </div>
+
+    <div class="proj-grid">
+      <div class="proj featured reveal">
+        <div>
+          <div class="proj-head">
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <span class="proj-chip">Exhibit A · Featured</span>
+              <span class="proj-chip alt">Gemma 4 Good</span>
             </div>
-            <div class="hero-right reveal">
-                <div class="hero-interests">
-                    <span class="interests-label">// what i'm into</span>
-                    <ul class="interests-list">
-                        <li>quantitative finance &amp; ML systems</li>
-                        <li>decentralized oracles &amp; DeFi</li>
-                        <li>prediction markets &amp; forecasting</li>
-                        <li>multi-agent AI frameworks</li>
-                        <li>quantum computing research</li>
-                    </ul>
-                </div>
+            <div class="proj-links">
+              <a href="#" target="_blank" rel="noopener" title="Repository">↗</a>
             </div>
+          </div>
+          <h3>GenoPath: Rare disease<br><em>reasoning engine.</em></h3>
+          <p>Fully local clinical reasoning agent powered by Gemma 4. Navigates a 55,000-node graph of ClinVar and HPO data using native function calling to diagnose rare diseases entirely offline, eliminating cloud dependencies for resource-limited clinics.</p>
+          <div class="proj-metric">
+            <div><span class="val">55K</span>graph nodes</div>
+            <div><span class="val">0 API</span>dependencies</div>
+            <div><span class="val">2x</span>cognitive load drop</div>
+          </div>
+          <div class="proj-stack">
+            <span>Gemma 4</span><span>Ollama</span><span>LiteRT</span><span>Python</span><span>FastAPI</span>
+          </div>
         </div>
-        <div class="hero-scroll">
-            <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
-            <span>Scroll</span>
+        <div class="proj-visual">
+          <div class="pv-head"><span>gn · benchmark</span><span>local</span></div>
+          <svg class="spark" id="sparkA" viewBox="0 0 400 90" preserveAspectRatio="none"></svg>
+          <div class="pv-stats">
+            <div><span>hops</span><span class="v">3.0 avg</span></div>
+            <div><span>vram</span><span class="v">9 GB</span></div>
+            <div><span>model</span><span class="v">E4B Q4_K_M</span></div>
+            <div><span>rank</span><span class="v">top 100</span></div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- ABOUT -->
-    <section id="about">
-        <div class="section-inner">
-            <div class="section-label reveal"><span class="label-line"></span><span>01 · About</span></div>
-            <div class="about-grid">
-                <div class="about-text reveal">
-                    <h2>Builder of quantitative<br><span class="accent">systems for finance</span></h2>
-                    <p>I build production-grade ML infrastructure at the intersection of quantitative finance and AI. Currently pursuing CS (AI/ML) at PES University, graduating May 2027.</p>
-                    <p>Past work spans production pipelines at SmartWealth.ai tracking every Nifty index constituent, quantum computing research, and open-source AI tools deployed at scale. Currently exploring multi-agent frameworks for equity research and prediction market dynamics.</p>
-                    <p>When I'm not in the weeds of model architecture, I'm thinking about decentralized risk systems and how on-chain consensus can replace opaque financial infrastructure.</p>
-                    <div class="about-tags">
-                        <span class="tag">Quantitative Finance</span>
-                        <span class="tag">ML Systems</span>
-                        <span class="tag">Blockchain / DeFi</span>
-                        <span class="tag">NLP / RAG</span>
-                        <span class="tag">Prediction Markets</span>
-                        <span class="tag">Quantum ML</span>
-                    </div>
-                </div>
-                <div class="about-terminal reveal">
-                    <div class="terminal-header">
-                        <span class="dot dot-red"></span>
-                        <span class="dot dot-yellow"></span>
-                        <span class="dot dot-green"></span>
-                        <span class="terminal-title">krishna@portfolio:~</span>
-                    </div>
-                    <div class="terminal-body">
-                        <div class="terminal-line"><span class="t-prompt">$</span><span class="t-cmd">whoami</span></div>
-                        <div class="terminal-line t-out">krishna_venkatesh</div>
-                        <div class="terminal-line mt"><span class="t-prompt">$</span><span class="t-cmd">cat interests.txt</span></div>
-                        <div class="terminal-line t-out">→ ML pipelines &amp; quant systems</div>
-                        <div class="terminal-line t-out">→ Decentralized finance &amp; oracles</div>
-                        <div class="terminal-line t-out">→ Prediction markets &amp; forecasting</div>
-                        <div class="terminal-line t-out">→ Quantum computing research</div>
-                        <div class="terminal-line t-out">→ Multi-agent AI frameworks</div>
-                        <div class="terminal-line mt"><span class="t-prompt">$</span><span class="t-cmd">cat status.txt</span></div>
-                        <div class="terminal-line t-out"><span class="t-green">●</span> Building NAV oracle on-chain</div>
-                        <div class="terminal-line t-out"><span class="t-green">●</span> 2 papers under review</div>
-                        <div class="terminal-line t-out"><span class="t-amber">◐</span> Open to internship &amp; research roles</div>
-                        <div class="terminal-line mt"><span class="t-prompt">$</span><span class="t-cursor">█</span></div>
-                    </div>
-                </div>
-            </div>
+      <div class="proj reveal">
+        <div class="proj-head">
+          <span class="proj-chip alt">Exhibit B · Meta × HF · Top 100</span>
+          <div class="proj-links">
+            <a href="https://krishvenky-narada-env.hf.space" target="_blank" rel="noopener" title="Live">◎</a>
+            <a href="https://github.com/KrishVenky/Narada-Env" target="_blank" rel="noopener" title="Repository">↗</a>
+          </div>
         </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience">
-        <div class="section-inner">
-            <div class="section-label reveal"><span class="label-line"></span><span>02 · Experience</span></div>
-            <h2 class="section-title reveal">Where I've <span class="accent">shipped</span></h2>
-            <div class="timeline">
-
-                <div class="timeline-item reveal">
-                    <div class="timeline-marker">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line"></div>
-                    </div>
-                    <div class="exp-card">
-                        <div class="exp-header">
-                            <div>
-                                <h3 class="exp-company">SmartWealth.ai</h3>
-                                <span class="exp-role">Machine Learning Intern</span>
-                            </div>
-                            <span class="exp-date">May – Jul 2025</span>
-                        </div>
-                        <div class="exp-location">Bengaluru, Karnataka</div>
-                        <ul class="exp-bullets">
-                            <li>Architected a continuous data pipeline with custom scrapers tracking every Nifty index constituent — capturing entry/exit events, real-time volatility, and P/E &amp; P/B ratios across 5 thematic pillars.</li>
-                            <li>Engineered a RAG system combining Google Gemini with a domain-fine-tuned FinBERT + ChromaDB vector store for Indian market-specific financial sentiment classification.</li>
-                            <li>Generated comprehensive market insight reports in under <strong>5 minutes</strong>, cutting research time by <strong>90%+</strong> — directly supporting the Aspire Diversified Stocks Portfolio (top 2% on Smallcase, 55.11% 3yr CAGR).</li>
-                        </ul>
-                        <div class="exp-tags">
-                            <span>Python</span><span>FinBERT</span><span>RAG</span><span>ChromaDB</span><span>Gemini</span><span>Web Scraping</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item reveal">
-                    <div class="timeline-marker">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line"></div>
-                    </div>
-                    <div class="exp-card">
-                        <div class="exp-header">
-                            <div>
-                                <h3 class="exp-company">People+AI <span class="exp-company-sub">· EkStep Foundation</span></h3>
-                                <span class="exp-role">Machine Learning Intern</span>
-                            </div>
-                            <span class="exp-date">Jun – Jul 2024</span>
-                        </div>
-                        <div class="exp-location">Bengaluru, Karnataka</div>
-                        <ul class="exp-bullets">
-                            <li>Built and shipped two open-source AI tools: <strong>ConsumeWise</strong> (multilingual food label analysis in English, Hindi, Marathi) and a chatbot for <strong>Sthaan</strong> — a UPI-style address protocol for last-mile delivery in Tier 2/3 cities.</li>
-                            <li>Delivered ConsumeWise from zero to full-stack demo in under a week within Agile sprints (daily standups, weekly delivery cycles).</li>
-                            <li>Supported setup of the organization's AI Governance Expert Council — advisor outreach, scheduling logistics, and briefing materials for inaugural sessions.</li>
-                        </ul>
-                        <div class="exp-tags">
-                            <span>React</span><span>NLP</span><span>LangChain</span><span>Multilingual AI</span><span>Open Source</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item reveal">
-                    <div class="timeline-marker">
-                        <div class="timeline-dot"></div>
-                    </div>
-                    <div class="exp-card">
-                        <div class="exp-header">
-                            <div>
-                                <h3 class="exp-company">I Love To Care Charitable Trust</h3>
-                                <span class="exp-role">Technical Volunteer</span>
-                            </div>
-                            <span class="exp-date">Volunteer</span>
-                        </div>
-                        <ul class="exp-bullets">
-                            <li>Architected and deployed a secure volunteer management and authentication portal, scaling to track thousands of community service hours.</li>
-                            <li>Engineered a centralized DB for automated registration, hour verification, and administrative reporting, eliminating legacy manual data entry.</li>
-                        </ul>
-                        <div class="exp-tags">
-                            <span>Full Stack</span><span>Auth</span><span>Database</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+        <h3>Narada Env — RL<br><em>disease diagnosis.</em></h3>
+        <p>A reinforcement learning environment natively supporting OpenEnv. An LLM agent plays clinical detective to navigate a dense knowledge graph, proving measurable diagnostic accuracy gains under GRPO training.</p>
+        <div class="proj-stack">
+          <span>RL Env</span><span>GRPO</span><span>PyTorch</span><span>OpenEnv</span><span>Neo4j</span>
         </div>
-    </section>
+      </div>
 
-    <!-- PROJECTS -->
-    <section id="projects">
-        <div class="section-inner">
-            <div class="section-label reveal"><span class="label-line"></span><span>03 · Projects</span></div>
-            <h2 class="section-title reveal">Things I've <span class="accent">built</span></h2>
-            <div class="projects-grid">
-
-                <div class="project-card featured reveal">
-                    <div class="project-card-header">
-                        <div class="project-badges">
-                            <span class="badge badge-featured">Featured</span>
-                            <span class="badge badge-contest">Bridgewater × Metaculus</span>
-                        </div>
-                        <a href="https://github.com/KrishVenky/Bridgewater-x-Metaculus-Forecasting-Bot" target="_blank" rel="noopener" class="project-link-btn" title="GitHub">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                        </a>
-                    </div>
-                    <h3 class="project-title">Macroeconomic &amp; Commodity<br>Forecasting Engine</h3>
-                    <p class="project-desc">Multi-threaded scraping architecture aggregating real-time alternative data from RSS feeds, NewsAPI, and Google News to dynamically update quantitative base rates. Achieved a 57% predictive win rate processing 100+ complex forecasts per hour in simulated tournament environments.</p>
-                    <div class="project-metric">
-                        <span class="metric-value">57%</span><span class="metric-label">win rate</span>
-                        <span class="metric-sep">·</span>
-                        <span class="metric-value">100+</span><span class="metric-label">forecasts/hr</span>
-                    </div>
-                    <div class="project-tags">
-                        <span>Python</span><span>Multi-threading</span><span>NewsAPI</span><span>Quantitative</span><span>RSS</span>
-                    </div>
-                </div>
-
-                <div class="project-card reveal">
-                    <div class="project-card-header">
-                        <div class="project-badges">
-                            <span class="badge badge-complete">OpenEnv</span>
-                        </div>
-                        <div class="project-card-actions">
-                            <a href="https://krishvenky-macro-signal-env.hf.space/web" target="_blank" rel="noopener" class="project-link-btn" title="Live Demo">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
-                            </a>
-                            <a href="https://github.com/KrishVenky/Macro-Signal-Engine-OpenEnv" target="_blank" rel="noopener" class="project-link-btn" title="GitHub">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <h3 class="project-title">Macro Signal Engine</h3>
-                    <p class="project-desc">OpenEnv environment where an LLM agent plays a macro quant analyst, managing a 4-asset portfolio (SPY, GLD, USO, TLT) in response to typed financial signal events. Tests multi-step causal reasoning under uncertainty — a geopolitical shock at step 1 implies a supply disruption at step 4. Agents that treat observations independently consistently underperform.</p>
-                    <div class="project-tags">
-                        <span>OpenEnv</span><span>LLM Agents</span><span>Python</span><span>FastAPI</span><span>RL Environment</span><span>HuggingFace</span>
-                    </div>
-                </div>
-
-                <div class="project-card reveal">
-                    <div class="project-card-header">
-                        <div class="project-badges">
-                            <span class="badge badge-contest">Guidewire DEVTrails 2026</span>
-                        </div>
-                        <a href="https://github.com/KrishVenky/Guidewire_Project" target="_blank" rel="noopener" class="project-link-btn" title="GitHub">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                        </a>
-                    </div>
-                    <h3 class="project-title">RainReady</h3>
-                    <p class="project-desc">Dual-trigger parametric income insurance for Zomato, Swiggy &amp; Blinkit delivery partners. When rain, AQI, or bandhs kill order flow, coverage activates automatically — no claim forms, UPI payout in minutes. A Dual-Trigger Parametric Model (DTPM) eliminates basis risk. Adaptive ML engine recalibrates zone thresholds weekly using historical baselines. LLM explains payouts in Hinglish to workers.</p>
-                    <div class="project-tags">
-                        <span>Parametric Insurance</span><span>Python</span><span>ML</span><span>LLM</span><span>UPI</span><span>Weather API</span>
-                    </div>
-                </div>
-
-            </div>
+      <div class="proj reveal">
+        <div class="proj-head">
+          <span class="proj-chip alt">Exhibit C · Guidewire · Top 40 (of 2K)</span>
+          <div class="proj-links">
+            <a href="https://github.com/KrishVenky/Guidewire_Project" target="_blank" rel="noopener" title="Repository">↗</a>
+          </div>
         </div>
-    </section>
-
-    <!-- RESEARCH -->
-    <section id="research">
-        <div class="section-inner">
-            <div class="section-label reveal"><span class="label-line"></span><span>04 · Research</span></div>
-            <h2 class="section-title reveal">Published <span class="accent">work</span></h2>
-            <div class="research-grid">
-
-                <div class="research-card reveal">
-                    <div class="research-status"><span class="badge badge-review">In Submission</span></div>
-                    <h3>Calibration-Aware Evaluation of Quantum Generative Models Under Extreme Class Imbalance</h3>
-                    <p>Benchmarked Quantum Boltzmann Machines against SMOTE baselines on physics data. Formulated a calibration-aware evaluation framework resolving underestimation in extreme data scarcity scenarios, gaining a +2.8% F1-score over baseline.</p>
-                    <div class="research-metric">
-                        <span class="metric-value">+2.8%</span><span class="metric-label">F1-score gain over SMOTE baseline</span>
-                    </div>
-                    <div class="research-tags">
-                        <span>Quantum ML</span><span>QBM</span><span>Class Imbalance</span><span>Calibration</span>
-                    </div>
-                </div>
-
-                <div class="research-card reveal">
-                    <div class="research-status"><span class="badge badge-review">In Submission</span></div>
-                    <h3>EV Charging Infrastructure Optimization For Urban Bengaluru</h3>
-                    <p>Engineered a spatial Genetic Algorithm framework processing 607,000 real-world traffic data segments. Deployed a 0.69s high-performance model to reallocate 100 EV chargers and resolve severe urban grid bottlenecks.</p>
-                    <div class="research-metric">
-                        <span class="metric-value">607K</span><span class="metric-label">traffic segments</span>
-                        <span class="metric-sep">·</span>
-                        <span class="metric-value">0.69s</span><span class="metric-label">model runtime</span>
-                    </div>
-                    <div class="research-tags">
-                        <span>Genetic Algorithms</span><span>Spatial Optimization</span><span>Urban Planning</span><span>Python</span>
-                    </div>
-                </div>
-
-            </div>
+        <h3>Hermetical — parametric<br><em>income cover.</em></h3>
+        <p>Dual-trigger parametric income insurance for delivery partners. Triggers on weather anomalies + zone order-drop proxy to release UPI payouts in minutes without claim forms. Cuts fraud via hardware + ML baseline isolation.</p>
+        <div class="proj-stack">
+          <span>FastAPI</span><span>React PWA</span><span>Postgres</span><span>Groq</span><span>Scikit-Learn</span>
         </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills">
-        <div class="section-inner">
-            <div class="section-label reveal"><span class="label-line"></span><span>05 · Skills</span></div>
-            <h2 class="section-title reveal">Tech <span class="accent">stack</span></h2>
-            <div class="skills-grid">
-
-                <div class="skill-category reveal">
-                    <div class="skill-cat-header"><span class="skill-cat-icon">⚡</span><span class="skill-cat-name">ML &amp; AI</span></div>
-                    <div class="skill-chips">
-                        <span>Python</span><span>TensorFlow</span><span>Scikit-learn</span><span>CNNs</span><span>GANs</span><span>NLP</span><span>Transformers</span><span>LangChain</span><span>RAG</span><span>Prompt Engineering</span><span>FinBERT</span>
-                    </div>
-                </div>
-
-                <div class="skill-category reveal">
-                    <div class="skill-cat-header"><span class="skill-cat-icon">🌐</span><span class="skill-cat-name">Frontend</span></div>
-                    <div class="skill-chips">
-                        <span>React.js</span><span>Next.js</span><span>JavaScript</span><span>HTML / CSS</span><span>Responsive Design</span><span>jQuery</span>
-                    </div>
-                </div>
-
-                <div class="skill-category reveal">
-                    <div class="skill-cat-header"><span class="skill-cat-icon">⚙️</span><span class="skill-cat-name">Backend</span></div>
-                    <div class="skill-chips">
-                        <span>Node.js</span><span>Express.js</span><span>FastAPI</span><span>Flask</span><span>REST APIs</span><span>Solidity</span>
-                    </div>
-                </div>
-
-                <div class="skill-category reveal">
-                    <div class="skill-cat-header"><span class="skill-cat-icon">🗄️</span><span class="skill-cat-name">Databases</span></div>
-                    <div class="skill-chips">
-                        <span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span><span>SQLite</span><span>ChromaDB</span>
-                    </div>
-                </div>
-
-                <div class="skill-category reveal">
-                    <div class="skill-cat-header"><span class="skill-cat-icon">🚀</span><span class="skill-cat-name">DevOps</span></div>
-                    <div class="skill-chips">
-                        <span>Git</span><span>Docker</span><span>Kubernetes</span><span>CI/CD</span><span>Linux</span>
-                    </div>
-                </div>
-
-                <div class="skill-category reveal">
-                    <div class="skill-cat-header"><span class="skill-cat-icon">🏆</span><span class="skill-cat-name">Certs &amp; Hackathons</span></div>
-                    <div class="skill-chips">
-                        <span>Gen AI – Databricks</span><span>OCI Foundations – Oracle '25</span><span>Quant Research – JPMC '25</span><span>IIITH Hackathon '24</span><span>Lazarus AI Competition '25</span>
-                    </div>
-                </div>
-
-            </div>
+      </div>
+      
+      <div class="proj reveal">
+        <div class="proj-head">
+          <span class="proj-chip alt">Exhibit D · Solana Frontier</span>
+          <div class="proj-links">
+            <a href="https://github.com/KrishVenky/nexus-402" target="_blank" rel="noopener" title="Repository">↗</a>
+          </div>
         </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-        <div class="section-inner">
-            <div class="section-label reveal"><span class="label-line"></span><span>06 · Contact</span></div>
-            <div class="contact-wrapper">
-                <div class="contact-text reveal">
-                    <h2>Let's <span class="accent">connect</span></h2>
-                    <p>Open to research collaborations, internship opportunities, and interesting builds. If you're working on something ambitious in quant finance, ML systems, or blockchain — reach out.</p>
-                </div>
-                <div class="contact-links reveal">
-                    <a href="mailto:krishvenky14@gmail.com" class="contact-link">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-                        krishvenky14@gmail.com
-                    </a>
-                    <a href="https://linkedin.com/in/krishnavenky/" target="_blank" rel="noopener" class="contact-link">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        linkedin.com/in/krishnavenky
-                    </a>
-                    <a href="https://github.com/KrishVenky" target="_blank" rel="noopener" class="contact-link">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                        github.com/KrishVenky
-                    </a>
-                    <a href="tel:+919110423447" class="contact-link">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 5.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2z"/></svg>
-                        +91 9110423447
-                    </a>
-                </div>
-            </div>
+        <h3>Nexus-402 — trustless<br><em>agent labor.</em></h3>
+        <p>Decentralized AI labor market on Solana where agents hire each other programmatically using the HTTP 402 standard. Smart contract escrow on Anchor guarantees trustless settlement for inference (e.g. Quant agent hires Analyst agent).</p>
+        <div class="proj-stack">
+          <span>Solana</span><span>Anchor</span><span>Next.js</span><span>FinBERT</span><span>Hailo-8 NPU</span>
         </div>
-    </section>
-
-    <footer>
-        <div class="footer-inner">
-            <span>Krishna Venkatesh · 2025</span>
-            <span>CS (AI/ML) · PES University · Bengaluru</span>
+      </div>
+      
+      <div class="proj reveal">
+        <div class="proj-head">
+          <span class="proj-chip alt">Exhibit E · HRT/Partcl Macro Hackathon</span>
+          <div class="proj-links">
+            <a href="https://github.com/KrishVenky/HRT_Partcl_Hackathon" target="_blank" rel="noopener" title="Repository">↗</a>
+          </div>
         </div>
-    </footer>
+        <h3>QSA Chip Design<br><em>macro placer.</em></h3>
+        <p>Quantum-Annealing-Inspired Simulated Annealing placer that positions chip macros. Minimizes proxy cost (wirelength + density + congestion). Achieved +27% performance over SA baselines across all 17 IBM benchmarks.</p>
+        <div class="proj-stack">
+          <span>Python</span><span>Simulated Annealing</span><span>Vectorization</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script src="script.js"></script>
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="sec-head reveal">
+      <div class="sec-num">04 — Research</div>
+      <h2 class="sec-title">Published <em>work.</em></h2>
+      <div class="sec-meta">Papers · 02</div>
+    </div>
+    <div class="papers">
+      <article class="paper reveal">
+        <span class="status">· In Submission</span>
+        <h3>Calibration-aware evaluation of <em>quantum generative models</em> under extreme class imbalance.</h3>
+        <p>Benchmarked Quantum Boltzmann Machines against SMOTE baselines on physics data. Formulated a calibration-aware evaluation framework resolving underestimation in extreme data scarcity — +2.8% F1 over baseline.</p>
+        <div class="paper-metric">
+          <div><span class="val">+2.8</span>F1 gain</div>
+          <div><span class="val">QBM</span>architecture</div>
+        </div>
+      </article>
+      <article class="paper reveal">
+        <span class="status">· In Submission</span>
+        <h3>EV charging infrastructure optimisation for <em>urban Bengaluru.</em></h3>
+        <p>Spatial Genetic Algorithm framework processing 607,000 real-world traffic segments. Reallocates 100 EV chargers in <strong>0.69s</strong> to resolve severe urban grid bottlenecks.</p>
+        <div class="paper-metric">
+          <div><span class="val">607K</span>segments</div>
+          <div><span class="val">0.69s</span>runtime</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="sec-head reveal">
+      <div class="sec-num">05 — Stack</div>
+      <h2 class="sec-title">Tools of the <em>trade.</em></h2>
+      <div class="sec-meta">Inventory · live</div>
+    </div>
+    <div class="skills">
+      <div class="sk reveal">
+        <div class="sk-h"><span class="n">01</span><span class="t">ML / AI</span></div>
+        <div class="sk-list">
+          <span>Python</span><span>TensorFlow</span><span>Scikit-learn</span><span>CNN / GAN</span><span>Transformers</span><span>LangChain</span><span>RAG</span><span>FinBERT</span>
+        </div>
+      </div>
+      <div class="sk reveal">
+        <div class="sk-h"><span class="n">02</span><span class="t">Frontend</span></div>
+        <div class="sk-list">
+          <span>React.js</span><span>Next.js</span><span>JavaScript</span><span>HTML / CSS</span><span>Responsive</span><span>jQuery</span>
+        </div>
+      </div>
+      <div class="sk reveal">
+        <div class="sk-h"><span class="n">03</span><span class="t">Backend</span></div>
+        <div class="sk-list">
+          <span>Node.js</span><span>Express</span><span>FastAPI</span><span>Flask</span><span>REST</span><span>Solidity</span>
+        </div>
+      </div>
+      <div class="sk reveal">
+        <div class="sk-h"><span class="n">04</span><span class="t">Data</span></div>
+        <div class="sk-list">
+          <span>MySQL</span><span>Postgres</span><span>MongoDB</span><span>SQLite</span><span>ChromaDB</span>
+        </div>
+      </div>
+      <div class="sk reveal">
+        <div class="sk-h"><span class="n">05</span><span class="t">Ops</span></div>
+        <div class="sk-list">
+          <span>Git</span><span>Docker</span><span>Kubernetes</span><span>CI / CD</span><span>Linux</span>
+        </div>
+      </div>
+      <div class="sk reveal">
+        <div class="sk-h"><span class="n">06</span><span class="t">Creds & Wins</span></div>
+        <div class="sk-list">
+          <span>Gemma 4 Good</span><span>Meta × HF Top 100</span><span>Guidewire Top 40</span><span>Solana Frontier Hackathon</span><span>HRT / Partcl Hackathon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="sec-head reveal">
+      <div class="sec-num">06 — Contact</div>
+      <h2 class="sec-title">End <em>matter.</em></h2>
+      <div class="sec-meta">reach · direct</div>
+    </div>
+    <div class="contact">
+      <div class="reveal">
+        <h2>Let's <em>talk.</em></h2>
+        <p>Open to research collaborations, internships, and interesting builds. If you're working on something ambitious in quant, ML systems, or on-chain risk — reach out.</p>
+      </div>
+      <div class="c-list reveal">
+        <a class="c-item" href="/cdn-cgi/l/email-protection#046f766d776c72616a6f7d3530446369656d682a676b69">
+          <span class="n">01 · mail</span>
+          <span class="v"><span class="__cf_email__" data-cfemail="4e253c273d26382b2025377f7a0e29232f2722602d2123">[email&#160;protected]</span></span>
+          <span class="arr">→</span>
+        </a>
+        <a class="c-item" href="https://linkedin.com/in/krishnavenky/" target="_blank" rel="noopener">
+          <span class="n">02 · linkedin</span>
+          <span class="v">/in/krishnavenky</span>
+          <span class="arr">→</span>
+        </a>
+        <a class="c-item" href="https://github.com/KrishVenky" target="_blank" rel="noopener">
+          <span class="n">03 · github</span>
+          <span class="v">@KrishVenky</span>
+          <span class="arr">→</span>
+        </a>
+        <a class="c-item" href="tel:+919110423447">
+          <span class="n">04 · phone</span>
+          <span class="v">+91 91104 23447</span>
+          <span class="arr">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>© Krishna Venkatesh · 2026</span>
+  <span class="stamp-foot">A Working Notebook · No. 001</span>
+  <span>PES University · Bengaluru · IN</span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
 </body>
 </html>
